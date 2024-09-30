@@ -49,7 +49,7 @@ public class userEndpoints {
         }
     }
 
-    // Read a user by username
+    // Read a user by userName
     public static Response readUser(String userName) {
         try {
             return given().spec(requestSpecification())
