@@ -7,8 +7,8 @@ public class routes {
 	
 	//User module
 	
-	public static String post_url = base_url +"/user";
-	public static String get_url = base_url +"/user/{username}";
-	public static String update_url = base_url +"/user/{username}";
-	public static String delete_url = base_url +"/user/{username}";
+	public static String createUser = "/user";
+	public static String getUser = "/user/{username}";
+	public static String updateUser = "/user/{username}";
+	public static String deleteUser = "/user/{username}";
 }
