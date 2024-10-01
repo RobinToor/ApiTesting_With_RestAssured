@@ -13,8 +13,8 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import pojo.user;
 import pojo.Pet.pet;
+import pojo.user.user;
 
 public class userEndpoints {
 

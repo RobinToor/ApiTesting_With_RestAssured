@@ -8,7 +8,7 @@ import com.github.javafaker.Faker;
 import static org.junit.Assert.*;
 import com.github.javafaker.Faker;
 import io.restassured.response.Response;
-import pojo.user;
+import pojo.user.user;
 import utilities.userEndpoints;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
