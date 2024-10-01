@@ -14,72 +14,35 @@ import pojo.Pet.category;
 import pojo.Pet.pet;
 import pojo.Pet.tags;
 import pojo.user.user;
+import utilities.configReader;
+import utilities.payLoads;
 import utilities.scenarioContext;
 import utilities.userEndpoints;
 import io.cucumber.java.en.Then;
 
 
-public class stepDefinitions {
+public class stepDefinitions extends payLoads{
 	
-	Faker faker = new Faker();
 	user userPayload = new user();
 	user updateUserPayloadUser = new user();
 	pet petpayload = new pet();
 	Response response;
 	scenarioContext context = new scenarioContext();
-	public static String userPayload_filePath = "src/test/resources/TempData/userPayload.json";
-	public static String petPayload_filePath = "src/test/resources/TempData/petPayload.json";
+	public static String userPayload_filePath = configReader.getProperty("userPayload_filePath");
+	public static String petPayload_filePath = configReader.getProperty("petPayload_filePath");
 	
 	
 	@Given("The create new user payload is created with dummy data")
 	public void the_create_new_user_payload_is_created_with_dummy_data() {
 				
-		userPayload.setId(faker.idNumber().hashCode());
-		userPayload.setUsername(faker.name().username());
-		userPayload.setFirstName(faker.name().firstName());
-		userPayload.setLastName(faker.name().lastName());
-		userPayload.setEmail(faker.internet().safeEmailAddress());
-		userPayload.setPassword(faker.internet().password(7, 10, false));
-		userPayload.setPhone(faker.phoneNumber().cellPhone());
+		userPayload = createUserPayload();
 		context.writeDataToFile(userPayload, userPayload_filePath);		
 	}
 	
 	@Given("The Add new pet to the store payload is created with dummy data")
 	public void the_add_new_pet_to_the_store_payload_is_created_with_dummy_data() {
 	    
-		//set Pet Id
-		petpayload.setId(faker.idNumber().hashCode());
-		
-		//set Pet Category  
-	    category category1 = new category(); 
-	    category1.setId(faker.number().randomDigit());
-	    category1.setName(faker.funnyName().name());	    
-	    petpayload.setCategory(category1);
-	    
-	    //set Pet Name
-	    petpayload.setName(faker.animal().name());
-	    
-	    //set PhotoUrls
-	    List<String> photoUrList = new ArrayList<>();
-	    photoUrList.add("");
-	    petpayload.setPhotoUrls(photoUrList);
-	    
-	    //set Pet Tags
-	    List<tags> tagsList = new ArrayList<>();	    
-	    tags tag1 = new tags(); 
-	    tag1.setId(faker.number().randomDigit());
-	    tag1.setName(faker.funnyName().name());
-	    
-	    tags tag2 = new tags();
-	    tag2.setId(faker.number().randomDigit());
-	    tag2.setName(faker.funnyName().name());
-	    
-	    tagsList.add(tag1);
-	    tagsList.add(tag2);	    
-	    petpayload.setTag(tagsList);
-	    
-	    //set Pet Status
-	    petpayload.setStatus("available");
+		petpayload = createPetPayload();
 	    context.writeDataToFile(petpayload, petPayload_filePath);
 	}
 	
