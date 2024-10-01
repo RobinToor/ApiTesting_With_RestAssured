@@ -1,0 +1,9 @@
+# Ignore Maven target directory
+/target/
+
+# Ignore log files
+*.log
+
+# Ignore all .jar files
+*.jar
+/logging.txt

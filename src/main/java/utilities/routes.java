@@ -11,4 +11,7 @@ public class routes {
 	public static String getUser = "/user/{username}";
 	public static String updateUser = "/user/{username}";
 	public static String deleteUser = "/user/{username}";
+	
+	//Pet module
+	public static String addNewPet = "/pet";
 }
