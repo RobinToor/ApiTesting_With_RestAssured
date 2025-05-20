@@ -1,5 +1,5 @@
 Feature: Operations about PetStore
-  I want to use this template for my feature file
+
 
    @tag1
   Scenario: Add a new pet to the store
