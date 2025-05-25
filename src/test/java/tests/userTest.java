@@ -3,10 +3,8 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import static org.hamcrest.Matchers.equalTo;
 import com.github.javafaker.Faker;
 import static org.junit.Assert.*;
-import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import pojo.user.user;
 import utilities.userEndpoints;
@@ -38,7 +36,7 @@ public class userTest {
     	Response response = userEndpoints.createUser(userPayload);
     	response.then().log().all();
     	
-    	assertEquals(response.getStatusCode(), 200);
+    	assertEquals(200, response.getStatusCode());
     }
     
 	@Test

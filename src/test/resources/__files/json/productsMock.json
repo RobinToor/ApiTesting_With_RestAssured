@@ -1,0 +1,23 @@
+{
+  "response": {
+    "message": "Hello World, This is a mock response",
+    "status": 200,
+    "jsonBody": [
+      {
+        "id": 1,
+        "name": "Wireless Mouse",
+        "price": 25.99,
+        "inStock": true
+      },
+      {
+        "id": 2,
+        "name": "Mechanical Keyboard",
+        "price": 89.99,
+        "inStock": false
+      }
+    ],
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
