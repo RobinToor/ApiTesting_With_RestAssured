@@ -12,7 +12,6 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import pojo.Pet.category;
 import pojo.Pet.pet;
-import pojo.Pet.tags;
 import pojo.user.user;
 import utilities.configReader;
 import utilities.payLoads;
@@ -42,7 +41,7 @@ public class stepDefinitions extends payLoads{
 	@Given("The Add new pet to the store payload is created with dummy data")
 	public void the_add_new_pet_to_the_store_payload_is_created_with_dummy_data() {
 	    
-		petpayload = createPetPayload();
+		petpayload = createPetPayload("available");
 	    context.writeDataToFile(petpayload, petPayload_filePath);
 	}
 	
@@ -66,7 +65,7 @@ public class stepDefinitions extends payLoads{
 	
 	@Then("The Api call should be succeeded with status code {int}")
 	public void the_api_call_should_be_succeeded_with_status_code(Integer int1) {
-    	assertEquals(response.getStatusCode(), 200);
+    	assertEquals(200, response.getStatusCode());
 	}
 	
 	@Then("{string} in response body should be {string}")
@@ -108,7 +107,7 @@ public class stepDefinitions extends payLoads{
 	@Then("User record should be deleted")
 	public void user_record_should_be_deleted() {
 		response = userEndpoints.readUser(updateUserPayloadUser.getUsername());
-		assertEquals(response.getStatusCode(), 404);
+		assertEquals(404, response.getStatusCode());
 		System.out.print(response.getStatusCode());
 		response.then().assertThat().body("message", equalTo("User not found"));
 	}

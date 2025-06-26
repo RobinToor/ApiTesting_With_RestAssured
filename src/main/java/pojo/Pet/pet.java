@@ -7,7 +7,7 @@ public class pet {
 	private category category;
 	String name;
 	private List<String> photoUrls;
-	private List<tags> tag;
+	private List<tag> tags;
 	private String status;
 	
 	public int getId() {
@@ -34,11 +34,11 @@ public class pet {
 	public void setPhotoUrls(List<String> photoUrl) {
 		this.photoUrls = photoUrl;
 	}
-	public List<tags> getTag() {
-		return tag;
+	public List<tag> getTags() {
+		return tags;
 	}
-	public void setTag(List<tags> tag) {
-		this.tag = tag;
+	public void setTags(List<tag> tags) {
+		this.tags = tags;
 	}
 	public String getStatus() {
 		return status;

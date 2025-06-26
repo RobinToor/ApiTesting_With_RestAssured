@@ -1,10 +1,10 @@
 package tests;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import com.github.javafaker.Faker;
-import static org.junit.Assert.*;
 import io.restassured.response.Response;
 import pojo.user.user;
 import utilities.userEndpoints;
@@ -34,16 +34,58 @@ public class userTest {
     public void testA_PostUser1() 
     {
     	Response response = userEndpoints.createUser(userPayload);
-    	response.then().log().all();
-    	
-    	assertEquals(200, response.getStatusCode());
+		if (response == null) throw new AssertionError();
+		response.then().log().all();
+		System.out.println(userPayload.getUsername());
+    	Assert.assertEquals(200, response.getStatusCode());
     }
     
 	@Test
-    public void testB_GetUser2() 
-    {
-    	Response response = userEndpoints.readUser(this.userPayload.getUsername());
-    	response.then().log().all();
-    	assertEquals(response.getStatusCode(), 200);
+    public void testB_GetUser2() throws InterruptedException {
+		try{
+			Thread.sleep(4000);
+			Response response = userEndpoints.readUser(userPayload.getUsername());
+			if (response == null) throw new AssertionError();
+			response.then().log().all();
+			System.out.println(userPayload.getUsername());
+			Assert.assertEquals(200, response.getStatusCode());
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
     }
+
+	@Test
+	public void testC_UpdateUser(){
+		faker = new Faker();
+		String previousEmail = userPayload.getEmail();
+		userPayload.setEmail(faker.internet().safeEmailAddress());
+		Response response = userEndpoints.updateUser(userPayload.getUsername(),userPayload);
+        if (response == null) throw new AssertionError();
+		response.then().log().all();
+		Assert.assertEquals(200, response.statusCode());
+		Assert.assertNotEquals(previousEmail,userPayload.getEmail());
+		System.out.println(previousEmail);
+		System.out.println(userPayload.getEmail());
+	}
+
+
+	@Test
+	public void testD_DeleteUser()
+	{
+
+		Response response = userEndpoints.deleteUser(userPayload.getUsername());
+		if (response == null) throw  new AssertionError();
+		response.then().log().all();
+		Assert.assertEquals("Assertion failed",200, response.getStatusCode());
+		Assert.assertEquals(userPayload.getUsername(),response.jsonPath().getString("message"));
+
+		System.out.println("Now validate by calling get user to check the record exists");
+		response = userEndpoints.readUser(userPayload.getUsername());
+		if (response == null) throw  new AssertionError();
+		response.then().log().all();
+        Assert.assertEquals(404,response.getStatusCode());
+		Assert.assertEquals("User not found",response.jsonPath().getString("message"));
+	}
+
 }

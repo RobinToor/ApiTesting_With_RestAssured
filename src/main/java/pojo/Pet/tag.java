@@ -1,6 +1,6 @@
 package pojo.Pet;
 
-public class tags {
+public class tag {
 	
 	int id;
 	String name;

@@ -7,7 +7,7 @@ import com.github.javafaker.Faker;
 
 import pojo.Pet.category;
 import pojo.Pet.pet;
-import pojo.Pet.tags;
+import pojo.Pet.tag;
 import pojo.user.user;
 
 /**
@@ -36,7 +36,7 @@ public class payLoads {
 	/**
 	 * @return pet payload created to add a new pet to the store
 	 */
-	public pet createPetPayload() {
+	public pet createPetPayload(String status) {
 
 		// set Pet Id
 		petpayload.setId(faker.idNumber().hashCode());
@@ -56,21 +56,21 @@ public class payLoads {
 		petpayload.setPhotoUrls(photoUrList);
 
 		// set Pet Tags
-		List<tags> tagsList = new ArrayList<>();
-		tags tag1 = new tags();
+		List<tag> tagsList = new ArrayList<>();
+		tag tag1 = new tag();
 		tag1.setId(faker.number().randomDigit());
 		tag1.setName(faker.funnyName().name());
 
-		tags tag2 = new tags();
+		tag tag2 = new tag();
 		tag2.setId(faker.number().randomDigit());
 		tag2.setName(faker.funnyName().name());
 
 		tagsList.add(tag1);
 		tagsList.add(tag2);
-		petpayload.setTag(tagsList);
+		petpayload.setTags(tagsList);
 
 		// set Pet Status
-		petpayload.setStatus("available");
+		petpayload.setStatus(status);
 
 		return petpayload;
 	}
