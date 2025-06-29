@@ -45,7 +45,6 @@ public class userEndpoints {
                     .when()
                     .post(routes.createUser);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return null; // Handle the exception as appropriate
         }
     }
@@ -58,7 +57,6 @@ public class userEndpoints {
                     .when()
                     .get(routes.getUser);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -72,7 +70,6 @@ public class userEndpoints {
                     .when()
                     .put(routes.updateUser);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -85,7 +82,6 @@ public class userEndpoints {
                     .when()
                     .delete(routes.deleteUser);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -98,8 +94,20 @@ public class userEndpoints {
                     .when()
                     .post(routes.addNewPet);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return null; // Handle the exception as appropriate
+        }
+    }
+
+    //Update an existing Pet Details
+    public static Response updateExistingPetDetails(pet payLoad){
+        try{
+            return given().spec(requestSpecification())
+                    .body(payLoad)
+                    .when()
+                    .put(routes.updateExistingPet);
+        }
+        catch (Exception e){
+            return null;
         }
     }
 }

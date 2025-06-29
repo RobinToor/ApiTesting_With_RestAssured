@@ -14,4 +14,5 @@ public class routes {
 	
 	//Pet module
 	public static String addNewPet = "/pet";
+	public static String updateExistingPet = "/pet";
 }
